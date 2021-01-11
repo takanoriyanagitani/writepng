@@ -157,3 +157,34 @@ int wp_set_iend(uint8_t* buf, const uint32_t len){
   memcpy(buf+8, "\xae\x42\x60\x82", 4);
   return wp_error_ok;
 }
+
+uint32_t wp_size_header(){ return 8; }
+uint32_t wp_size_ihdr(){   return 4+4 + 13 + 4; }
+uint32_t wp_size_iend(){   return 4+4 +  0 + 4; }
+uint32_t wp_size_idat_rgba_raw(const uint32_t w){
+  return 0
+    + 4   // chunk size
+    + 4   // IDAT
+    + 2   // CMF, FLG
+    + 1   // BFINAL, BTYPE
+    + 4   // LEN, NLEN
+    + 1   // filter
+    + 4*w // width * rgba
+  ;
+}
+
+int wp_write_png(
+  const uint8_t* rgba,
+  const uint32_t size,
+  const uint32_t width,
+  const uint32_t height,
+  uint8_t* buf,
+  const uint32_t bufsz
+){
+  const uint32_t pxsize = width*height*4;
+  switch(pxsize <= size){
+    case true: break;
+    default:   return wp_error_mem_short;
+  }
+  return wp_error_ok;
+}
