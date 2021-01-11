@@ -44,7 +44,7 @@ int wp_set_ihdr_rgba_raw(
   const uint32_t width,
   const uint32_t height
 ){
-  switch(21 <= len){
+  switch(25 <= len){
     case true: break;
     default:   return wp_error_mem_short;
   }
@@ -74,6 +74,9 @@ int wp_set_ihdr_rgba_raw(
 
   uint8_t* interlace = filter+1;
   *interlace = 0;
+
+  uint32_t* chk = (uint32_t*)(interlace+1);
+  *chk = wp_bswap5(wp_crc32(buf+4, 4+13));
 
   return wp_error_ok;
 }

@@ -1,6 +1,11 @@
 #include "writepng.h"
 
 int svga(){
+  switch(wp_set_ihdr_rgba_raw(NULL, 0, 800, 600)){
+    case wp_error_mem_short: break;
+    default:                 return 1;
+  }
+
   uint8_t buf[256] = {0};
   switch(wp_set_ihdr_rgba_raw(buf, 256, 800, 600)){
     case wp_error_ok: break;
@@ -58,6 +63,12 @@ int svga(){
   switch(*interlace){
     case 0:  break;
     default: return 1;
+  }
+
+  const uint32_t* chk = (const uint32_t*)(interlace+1);
+  switch(wp_bswap5(*chk)){
+    case 0x9a768270: break;
+    default:         return 1;
   }
   return 0;
 }
