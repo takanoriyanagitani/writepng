@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(writepng)
 
+set(CMAKE_C_FLAGS "-Wall -Werror")
+
 set(CMAKE_C_FLAGS_DEBUG "-O0 -g -coverage")
 set(CMAKE_BUILD_TYPE Debug)
 
@@ -21,3 +23,5 @@ add_test(NAME wp_set_header_ok COMMAND wp_set_header ok)
 add_test(NAME wp_set_header_ng COMMAND wp_set_header ng)
 
 add_test(NAME wp_set_ihdr_vga COMMAND wp_set_ihdr svga)
+
+add_test(NAME wp_set_idat_line_rgba_raw COMMAND wp_silr2 fhd)

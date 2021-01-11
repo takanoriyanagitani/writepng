@@ -13,3 +13,6 @@ target_link_libraries(wp_set_header z)
 
 add_executable(wp_set_ihdr wp_set_ihdr.c)
 target_link_libraries(wp_set_ihdr z)
+
+add_executable(wp_silr2 wp_silr2.c)
+target_link_libraries(wp_silr2 z)
