@@ -36,15 +36,44 @@ int wp_set_header(uint8_t* buf, const uint32_t len){
   return wp_error_ok;
 }
 
+uint32_t wp_bswap5(const uint32_t x){ return __builtin_bswap32(x); }
+
 int wp_set_ihdr_rgba_raw(
   uint8_t* buf,
   const uint32_t len,
-  const uint16_t width,
-  const uint16_t height
+  const uint32_t width,
+  const uint32_t height
 ){
   switch(21 <= len){
     case true: break;
     default:   return wp_error_mem_short;
   }
+
+  uint32_t* size = (uint32_t*)buf;
+  *size = wp_bswap5(13);
+
+  memcpy(buf+4, "IHDR", 4);
+
+  uint32_t* w = size+2;
+  *w = wp_bswap5(width);
+
+  uint32_t* h = w+1;
+  *h = wp_bswap5(height);
+
+  uint8_t* bit = buf+16;
+  *bit = 8;
+
+  uint8_t* color = bit+1;
+  *color = 6;
+
+  uint8_t* comp = color+1;
+  *comp = 0;
+
+  uint8_t* filter = comp+1;
+  *filter = 0;
+
+  uint8_t* interlace = filter+1;
+  *interlace = 0;
+
   return wp_error_ok;
 }

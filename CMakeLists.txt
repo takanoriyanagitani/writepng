@@ -20,4 +20,4 @@ add_test(NAME wp_crc32_IEND COMMAND wp_crc32 IEND ae426082)
 add_test(NAME wp_set_header_ok COMMAND wp_set_header ok)
 add_test(NAME wp_set_header_ng COMMAND wp_set_header ng)
 
-add_test(NAME wp_set_ihdr_vga COMMAND wp_set_ihdr vga)
+add_test(NAME wp_set_ihdr_vga COMMAND wp_set_ihdr svga)
