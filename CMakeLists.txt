@@ -26,3 +26,6 @@ add_test(NAME wp_set_ihdr_vga COMMAND wp_set_ihdr svga)
 
 add_test(NAME wp_silr2_fullhd COMMAND wp_silr2 fhd)
 add_test(NAME wp_silr2_rgba11 COMMAND wp_silr2 1x1)
+
+add_test(NAME wp_set_iend_ok COMMAND wp_set_iend ok)
+add_test(NAME wp_set_iend_ng COMMAND wp_set_iend ng)

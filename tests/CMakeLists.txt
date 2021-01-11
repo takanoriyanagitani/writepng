@@ -16,3 +16,6 @@ target_link_libraries(wp_set_ihdr z)
 
 add_executable(wp_silr2 wp_silr2.c)
 target_link_libraries(wp_silr2 z)
+
+add_executable(wp_set_iend wp_set_iend.c)
+target_link_libraries(wp_set_iend z)

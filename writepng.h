@@ -146,3 +146,14 @@ int wp_set_idat_line_rgba_raw(
 
   return wp_error_ok;
 }
+
+int wp_set_iend(uint8_t* buf, const uint32_t len){
+  switch(12 <= len){
+    case true: break;
+    default:   return wp_error_mem_short;
+  }
+  memcpy(buf,   "\0\0\0\0",         4);
+  memcpy(buf+4, "IEND",             4);
+  memcpy(buf+8, "\xae\x42\x60\x82", 4);
+  return wp_error_ok;
+}
