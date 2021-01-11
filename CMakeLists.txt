@@ -24,4 +24,5 @@ add_test(NAME wp_set_header_ng COMMAND wp_set_header ng)
 
 add_test(NAME wp_set_ihdr_vga COMMAND wp_set_ihdr svga)
 
-add_test(NAME wp_set_idat_line_rgba_raw COMMAND wp_silr2 fhd)
+add_test(NAME wp_silr2_fullhd COMMAND wp_silr2 fhd)
+add_test(NAME wp_silr2_rgba11 COMMAND wp_silr2 1x1)

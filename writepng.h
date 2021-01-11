@@ -120,7 +120,10 @@ int wp_set_idat_line_rgba_raw(
   uint8_t* flg = cmf+1;
   *flg = 0x01; // no dict, fastest compression
 
-  uint16_t* dlen = (uint16_t*)(flg+1);
+  uint8_t* btype = flg+1;
+  *btype = 0x01; // final, no compression
+
+  uint16_t* dlen = (uint16_t*)(btype+1);
   *dlen = org_size;
 
   uint16_t* nlen = dlen+1;
@@ -130,8 +133,8 @@ int wp_set_idat_line_rgba_raw(
   *pixdata = 0x00; // no filter
   memcpy(pixdata+1, data, 4*width);
 
-  uint32_t* adler = (uint32_t*)(pixdata + 1 + 4*width);
-  *adler = wp_bswap5(wp_adler32(pixdata, 1 + 4*width));
+  uint32_t* adler = (uint32_t*)(pixdata + org_size);
+  *adler = wp_bswap5(wp_adler32(pixdata, org_size));
 
   uint32_t* c = adler+1;
   *c = wp_bswap5(wp_crc32(
